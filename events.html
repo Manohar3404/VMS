@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer Management System - Events</title>
+    <!-- Bootstrap CSS -->
+     <link href="events.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+</head>
+<body>
+
+<header class="header">
+    <h1>Volunteer Events</h1>
+    <p>Join us for amazing volunteer opportunities and make a difference!</p>
+</header>
+
+<div class="container">
+    <!-- Filters -->
+    <div class="filter-container row justify-content-center">
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <label for="place-filter" class="form-label">Place</label>
+            <select id="place-filter" class="form-select filter-select">
+                <option value="">All Places</option>
+                <option value="Beach">Beach</option>
+                <option value="Community Center">Community Center</option>
+                <option value="Park">Park</option>
+            </select>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <label for="date-filter" class="form-label">Date</label>
+            <input type="date" id="date-filter" class="form-control">
+        </div>
+    </div>
+
+    <div class="row" id="event-list">
+        <!-- Event cards will be dynamically inserted here -->
+    </div>
+</div>
+
+<!-- Bootstrap JS & Popper.js -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+<script>
+// Sample event data (replace with data from your backend)
+const events = [
+    {
+        title: "Beach Cleanup",
+        date: "2024-12-20",
+        place: "Beach",
+        description: "Join us for a beach cleanup event to help preserve our environment."
+    },
+    {
+        title: "Blood Donation Camp",
+        date: "2024-12-25",
+        place: "Community Center",
+        description: "Donate blood and help save lives at our blood donation camp."
+    },
+    {
+        title: "Food Drive",
+        date: "2024-12-30",
+        place: "Park",
+        description: "Help distribute food to the homeless in our community."
+    }
+];
+
+// Function to display events dynamically
+function displayEvents(filteredEvents) {
+    const eventListElement = document.getElementById('event-list');
+    eventListElement.innerHTML = ''; // Clear previous content
+
+    filteredEvents.forEach(event => {
+        // Create a Bootstrap card for each event
+        const eventCard = document.createElement('div');
+        eventCard.classList.add('col-lg-4', 'col-md-6', 'col-sm-12', 'event-card');
+        
+        eventCard.innerHTML = `
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">${event.title}</h5>
+                    <p class="card-text">${event.description}</p>
+                    <p class="event-date">Date: ${event.date}</p>
+                    <p class="event-place">Place: ${event.place}</p>
+                    <button class="btn btn-primary">Register</button>
+                </div>
+            </div>
+        `;
+
+        eventListElement.appendChild(eventCard);
+    });
+}
+
+// Function to filter events based on place and date
+function filterEvents() {
+    const placeFilter = document.getElementById('place-filter').value;
+    const dateFilter = document.getElementById('date-filter').value;
+
+    const filteredEvents = events.filter(event => {
+        const matchesPlace = placeFilter ? event.place === placeFilter : true;
+        const matchesDate = dateFilter ? event.date === dateFilter : true;
+        return matchesPlace && matchesDate;
+    });
+
+    displayEvents(filteredEvents);
+}
+
+// Event listeners for filters
+document.getElementById('place-filter').addEventListener('change', filterEvents);
+document.getElementById('date-filter').addEventListener('change', filterEvents);
+
+// Initial call to display all events
+displayEvents(events);
+</script>
+
+</body>
+</html>

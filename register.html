@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Volunteer Management System</title>
+    <link rel="stylesheet" href="register.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+       
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <!-- <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">Volunteer Management</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="events.html">Events</a></li>
+                        <li class="nav-item"><a class="nav-link" href="register.html">Register</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header> -->
+
+    <!-- Register/Login Form -->
+    <div class="register-form">
+        <h2 id="form-title">Register</h2>
+        <form id="register-form" action="/register" method="POST">
+            <div class="form-group" id="name-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" class="form-control" placeholder="Enter your full name" required>
+            </div>
+            <div class="form-group" id="email-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group" id="city-group">
+                <label for="city">City</label>
+                <input type="text" id="city" name="city" class="form-control" placeholder="Enter your city" required>
+            </div>
+            <div class="form-group" id="phone-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" class="form-control" placeholder="Enter your phone number" required>
+            </div>
+            <div class="form-group" id="password-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" required>
+            </div>
+            <div class="form-group" id="confirm-password-group">
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" name="confirm_password" class="form-control" placeholder="Confirm your password" required>
+            </div>
+            <button type="submit" id="submit-button" class="btn btn-primary w-100">Register</button>
+            <div class="login-link">
+                <p id="login-text">Already registered? <a href="#" id="toggle-login">Login here</a></p>
+            </div>
+        </form>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="bg-primary text-white text-center py-3">
+        <p>&copy; 2024 Volunteer Management System | All Rights Reserved</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function toggleForm(toLogin) {
+            const formTitle = document.getElementById('form-title');
+            const submitButton = document.getElementById('submit-button');
+            const nameGroup = document.getElementById('name-group');
+            const cityGroup = document.getElementById('city-group');
+            const phoneGroup = document.getElementById('phone-group');
+            const confirmPasswordGroup = document.getElementById('confirm-password-group');
+            const loginText = document.getElementById('login-text');
+
+            if (toLogin) {
+                formTitle.textContent = 'Login';
+                submitButton.textContent = 'Login';
+                submitButton.formAction = '/login';
+                nameGroup.classList.add('hidden');
+                cityGroup.classList.add('hidden');
+                phoneGroup.classList.add('hidden');
+                confirmPasswordGroup.classList.add('hidden');
+                loginText.innerHTML = "Don't have an account? <a href='#' id='toggle-register'>Register here</a>";
+            } else {
+                formTitle.textContent = 'Register';
+                submitButton.textContent = 'Register';
+                submitButton.formAction = '/register';
+                nameGroup.classList.remove('hidden');
+                cityGroup.classList.remove('hidden');
+                phoneGroup.classList.remove('hidden');
+                confirmPasswordGroup.classList.remove('hidden');
+                loginText.innerHTML = "Already registered? <a href='#' id='toggle-login'>Login here</a>";
+            }
+            attachListeners();
+        }
+
+        function attachListeners() {
+            document.getElementById('toggle-login')?.addEventListener('click', function (e) {
+                e.preventDefault();
+                toggleForm(true);
+            });
+            document.getElementById('toggle-register')?.addEventListener('click', function (e) {
+                e.preventDefault();
+                toggleForm(false);
+            });
+        }
+
+        // Attach initial listeners
+        attachListeners();
+    </script>
+</body>
+</html>

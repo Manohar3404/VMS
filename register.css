@@ -1,0 +1,26 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+.register-form {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.register-form h2 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+.register-form .form-control {
+    margin-bottom: 1rem;
+}
+.login-link {
+    text-align: center;
+    margin-top: 1rem;
+}
+.hidden {
+    display: none;
+}
